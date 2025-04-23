@@ -6,19 +6,18 @@ using Newtonsoft.Json;
 using HobbyManiaManager.Models;
 using HobbyManiaManager.Forms;
 using System.Drawing;
+using HobbyManiaManager.Utils;
 
 namespace HobbyManiaManager
 {
     public partial class MainForm : Form
     {
-        private readonly RentalService service;
         private readonly MoviesRepository moviesRepository;
         private readonly CustomersRepository customersRepository;
 
         public MainForm()
         {
             InitializeComponent();
-            service = new RentalService();
             moviesRepository = MoviesRepository.Instance;
             customersRepository = CustomersRepository.Instance;
         }
@@ -28,11 +27,17 @@ namespace HobbyManiaManager
             this.AutoScaleMode = AutoScaleMode.None;
 
             LoadMovies();
-            Demo();
+            CreateRandomCustomers();
+
             labelMoviesCounter.Text = $"{moviesRepository.Count} movies loaded.";
 
             this.tabControlMain.Font = new Font("Segoe UI", 16, FontStyle.Regular);
 
+            BuildTabs();
+        }
+
+        private void BuildTabs()
+        {
             var catalog = new CatalogForm();
             catalog.TopLevel = false;
             catalog.FormBorderStyle = FormBorderStyle.None;
@@ -51,7 +56,6 @@ namespace HobbyManiaManager
             this.tabPageCatalog.Controls.Add(catalog);
             this.tabPageCustomers.Controls.Add(customers);
 
-
             catalog.Location = new Point(0, 0);
             customers.Location = new Point(0, 0);
             catalog.Show();
@@ -65,21 +69,14 @@ namespace HobbyManiaManager
             moviesRepository.AddAll(movies);
         }
 
-        private void Demo()
+        private void CreateRandomCustomers()
         {
-            var c = new Customer(Customer.NextCustomerId, "https://i.pravatar.cc/200?img=4", "Nacho", "nacho@xtec.cat", "618 477 246", DateTime.Now);
-            customersRepository.Add(c);
-            
-            var c2 = new Customer(Customer.NextCustomerId, "https://i.pravatar.cc/200?img=3", "Paco", "paco@xtec.cat", "618 477 666", DateTime.Now);
-            customersRepository.Add(c2);
-
-            var m = moviesRepository.GetById(238);
-            service.Rent(c, m, "El cliente avisa que el dvd está muy rayado");
-
-
-            var m2 = moviesRepository.GetById(240);
-            service.Rent(c, m2);
-            service.FinishRental(c, m2, "El cliente deja a deber 200ptas de este alquiler");
+            var generator = new RandomCustomerGenerator();
+            for (int i = 0; i < 100; i++) {
+                generator.Generate();
+                var c = new Customer(Customer.NextCustomerId, generator.AvatarUrl, generator.FullName, generator.Email, generator.PhoneNumber, generator.RegistrationDate);
+                customersRepository.Add(c);
+            }
         }
 
         private void buttonCatalog_Click(object sender, EventArgs e)

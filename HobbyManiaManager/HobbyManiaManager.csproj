@@ -77,6 +77,7 @@
     <Compile Include="Forms\CustomersListForm.Designer.cs">
       <DependentUpon>CustomersListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\RandomCustomerGenerator.cs" />
     <Compile Include="ViewModels\MovieDataGridViewModel.cs" />
     <Compile Include="Forms\RentalForm.cs">
       <SubType>Form</SubType>
