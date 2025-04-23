@@ -38,10 +38,6 @@ namespace HobbyManiaManager
             customers.Add((Customer)customer.Clone());
             Console.Write(customer);
         }
-        public void AddRentalToHistory(Customer customer, Rental rental)
-        {
-            AddRentalToHistory(customer.Id, rental);
-        }
 
         public void AddRentalToHistory(int customerId, Rental rental)
         {

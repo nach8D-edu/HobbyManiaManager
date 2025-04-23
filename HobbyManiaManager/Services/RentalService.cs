@@ -17,9 +17,9 @@ namespace HobbyManiaManager
             customersRepository = CustomersRepository.Instance;
         }
 
-        public void Rent(Customer customer, Movie movie, string notes = null)
+        public void Rent(Customer customer, Movie movie, string notes = null, DateTime? startDate = null)
         {
-            var rental = new Rental(movie.Id, customer.Id, notes);
+            var rental = new Rental(movie.Id, customer.Id, notes, startDate);
             rentalsRepository.Add(rental);
             Log();
         }

@@ -228,6 +228,7 @@
             this.dataGridViewActiveRentals.Name = "dataGridViewActiveRentals";
             this.dataGridViewActiveRentals.Size = new System.Drawing.Size(731, 208);
             this.dataGridViewActiveRentals.TabIndex = 0;
+            this.dataGridViewActiveRentals.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewActiveRentals_CellDoubleClick);
             this.dataGridViewActiveRentals.Paint += new System.Windows.Forms.PaintEventHandler(this.dataGridView1_Paint);
             // 
             // buttonRentalHistory
@@ -238,6 +239,7 @@
             this.buttonRentalHistory.TabIndex = 4;
             this.buttonRentalHistory.Text = "Rental History";
             this.buttonRentalHistory.UseVisualStyleBackColor = true;
+            this.buttonRentalHistory.Click += new System.EventHandler(this.buttonRentalHistory_Click);
             // 
             // CustomerEditForm
             // 

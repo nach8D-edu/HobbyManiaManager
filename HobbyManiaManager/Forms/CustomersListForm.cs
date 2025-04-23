@@ -37,7 +37,7 @@ namespace HobbyManiaManager.Forms
                 DataGridViewRow selectedRow = dataGridViewCustomersList.Rows[e.RowIndex];
                 var id = (int)selectedRow.Cells[0].Value;
                 var customer = repository.GetById(id);
-                var customerForm = new CustomerEditForm(customer);
+                var customerForm = new CustomerEditForm(this, customer);
                 customerForm.ShowDialog();
             }
         }
@@ -58,7 +58,7 @@ namespace HobbyManiaManager.Forms
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
-            var createCustomer = new CustomerEditForm(null, this);
+            var createCustomer = new CustomerEditForm(this);
             createCustomer.ShowDialog();
         }
 

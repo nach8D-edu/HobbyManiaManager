@@ -7,30 +7,30 @@ namespace HobbyManiaManager.Forms
 {
     public partial class RentalForm : Form
     {
-        private CustomersRepository customersRepository;
-        private RentalService rentalService;
-        private Rental rental;
-        private Movie movie;
-        private Customer customer;
-        private UserControl parent;
+        private CustomersRepository _customersRepository;
+        private RentalService _rentalService;
+        private Rental _rental;
+        private Movie _movie;
+        private Customer _customer;
+        private Control _parent;
 
-        public RentalForm(Movie movie, UserControl parent)
+        public RentalForm(Movie movie, Control parent)
         {
             InitializeComponent();
-            this.customersRepository = CustomersRepository.Instance;
-            this.rentalService = new RentalService();
+            this._customersRepository = CustomersRepository.Instance;
+            this._rentalService = new RentalService();
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
 
-            this.movie = movie;
-            this.parent = parent;
+            this._movie = movie;
+            this._parent = parent;
 
-            this.rental = rentalService.GetMovieRental(movie.Id);
-            if (rental != null) {
-                var c = customersRepository.GetById(rental.CustomerId);
+            this._rental = _rentalService.GetMovieRental(movie.Id);
+            if (_rental != null) {
+                var c = _customersRepository.GetById(_rental.CustomerId);
                 if (c == null) { 
                     // exception
                 }
-                this.customer = c;
+                this._customer = c;
             }
 
             this.dateTimePickerEnd.Format = DateTimePickerFormat.Custom;
@@ -41,47 +41,46 @@ namespace HobbyManiaManager.Forms
 
         private void RentalForm_Load(object sender, EventArgs e)
         {
-            this.pictureBoxMoviePoster.Load(movie.PosterUrl(200));
-            this.labelMovieTitle.Text = movie.Title;
+            this.pictureBoxMoviePoster.Load(_movie.PosterUrl(200));
+            this.labelMovieTitle.Text = _movie.Title;
             this.labelMovieTitle.MaximumSize = new Size(300, 0);
             this.labelMovieTitle.AutoSize = true;
 
-            if (customer != null)
+            if (_customer != null)
             {
                 LoadCustomer();
                 this.textBoxId.Enabled = false;
             }
             else {
                 SelectCustomer();
-                var t = movie.Title.Length > 50 ? movie.Title.Substring(0, 50) + "..." : movie.Title;
+                var t = _movie.Title.Length > 50 ? _movie.Title.Substring(0, 50) + "..." : _movie.Title;
                 this.Text = $"Rental: {t}";
                 this.buttonStartEnd.Enabled = false;
             }
-            this.textBoxRentalNotes.Text = rental?.Notes;
+            this.textBoxRentalNotes.Text = _rental?.Notes;
 
-            if (rental != null)
+            if (_rental != null)
             {
                 this.buttonStartEnd.Text = "End Rental";
-                this.dateTimePickerStartDate.Value = rental.StartDate;
+                this.dateTimePickerStartDate.Value = _rental.StartDate;
                 this.dateTimePickerStartDate.Enabled = false;
             }
             else {
                 this.dateTimePickerEnd.Visible = false;
                 this.labelEndDate.Visible = false;
             }
-
         }
 
         private void LoadCustomer()
         {
-            var t = movie.Title.Length > 50 ? movie.Title.Substring(0, 50) + "..." : movie.Title;
-            this.Text = $"Rental: {t} from {customer.Name}({customer.Id})";
-            this.pictureBoxCustomerAvatar.Load(customer.Avatar);
-            this.labelCustomerName.Text = customer.Name;
+            var t = _movie.Title.Length > 50 ? _movie.Title.Substring(0, 50) + "..." : _movie.Title;
+            this.Text = $"Rental: {t} from {_customer.Name}({_customer.Id})";
+            this.pictureBoxCustomerAvatar.Load(_customer.Avatar);
+            this.labelCustomerName.Text = _customer.Name;
             this.labelCustomerName.MaximumSize = new Size(300, 0);
             this.labelCustomerName.AutoSize = true;
             this.buttonStartEnd.Enabled = true;
-            this.textBoxId.Text = customer.Id.ToString();
+            this.textBoxId.Text = _customer.Id.ToString();
             this.labelCustomerName.Enabled = true;
         }
 
@@ -94,11 +93,11 @@ namespace HobbyManiaManager.Forms
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             var c = int.TryParse(this.textBoxId.Text, out var id)
-                ? customersRepository.GetById(id)
+                ? _customersRepository.GetById(id)
                 : null;
             if (c != null)
             {
-                this.customer = c;
+                this._customer = c;
                 LoadCustomer();
             }
             else
@@ -117,23 +116,26 @@ namespace HobbyManiaManager.Forms
 
         private void buttonStartEnd_Click(object sender, EventArgs e)
         {
-            if (rental == null)
+            if (_rental == null)
             {
-                if (customer == null || movie == null) { 
-                    // Exception
+                // Creating a new rental
+                if (_customer == null) {
+                    throw new ArgumentException("The customer can not be null.", nameof(_customer));
                 }
-                // Starting new rental
-                rentalService.Rent(customer, movie, this.textBoxRentalNotes.Text);
-                MessageBox.Show("Rent created.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //TODO hacer algo con el start date
+                if (_movie == null)
+                {
+                    throw new ArgumentException("The Movie can not be null.", nameof(_movie));
+                }
+
+                _rentalService.Rent(_customer, _movie, this.textBoxRentalNotes.Text, this.dateTimePickerStartDate.Value);
+                MessageBox.Show($"Rent created for movie: {_movie.Title}.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else {
                 // Ending an existing rental
-                rentalService.FinishRental(customer, movie, this.textBoxRentalNotes.Text);
-                MessageBox.Show("Rent finished.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //TODO hacer algo con las fechas
+                _rentalService.FinishRental(_customer, _movie, this.textBoxRentalNotes.Text);
+                MessageBox.Show($"Rent finished for movie: {_movie.Title}.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            this.parent?.Refresh();
+            this._parent?.Refresh();
             this.Dispose();
         }
     }

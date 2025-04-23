@@ -77,6 +77,12 @@
     <Compile Include="Forms\CustomersListForm.Designer.cs">
       <DependentUpon>CustomersListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\RentalHistoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RentalHistoryForm.Designer.cs">
+      <DependentUpon>RentalHistoryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\RandomCustomerGenerator.cs" />
     <Compile Include="ViewModels\MovieDataGridViewModel.cs" />
     <Compile Include="Forms\RentalForm.cs">
@@ -124,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RentalForm.resx">
       <DependentUpon>RentalForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RentalHistoryForm.resx">
+      <DependentUpon>RentalHistoryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -6,15 +6,16 @@ namespace HobbyManiaManager.Models
     {
         public int MovieId { get; set; }
         public int CustomerId { get; set; }
-        public DateTime StartDate { get; set; } = DateTime.Now;
+        public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public string Notes { get; set; }
 
-        public Rental(int movieId, int customerId, string notes)
+        public Rental(int movieId, int customerId, string notes, DateTime? startDate = null)
         {
             MovieId = movieId;
             CustomerId = customerId;
             Notes = notes;
+            StartDate = startDate ?? DateTime.Now;
         }
 
         public object Clone()

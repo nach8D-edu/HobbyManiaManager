@@ -28,37 +28,33 @@ namespace HobbyManiaManager
 
             LoadMovies();
             CreateRandomCustomers();
+            BuildTabs();
 
             labelMoviesCounter.Text = $"{moviesRepository.Count} movies loaded.";
-
-            this.tabControlMain.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-
-            BuildTabs();
         }
 
         private void BuildTabs()
         {
-            var catalog = new CatalogForm();
-            catalog.TopLevel = false;
-            catalog.FormBorderStyle = FormBorderStyle.None;
-            catalog.AutoScaleMode = AutoScaleMode.None;
-            catalog.Visible = true;
-            catalog.Font = this.Font;
+            this.tabControlMain.Font = new Font("Segoe UI", 16, FontStyle.Regular);
 
+            var catalog = new CatalogForm();
+            ConfigureForm(catalog);
+            this.tabPageCatalog.Controls.Add(catalog);
+            catalog.Show();
 
             var customers = new CustomersListForm();
-            customers.TopLevel = false;
-            customers.FormBorderStyle = FormBorderStyle.None;
-            customers.AutoScaleMode = AutoScaleMode.None;
-            customers.Visible = true;
-            customers.Font = this.Font;
-
-            this.tabPageCatalog.Controls.Add(catalog);
+            ConfigureForm(customers);
             this.tabPageCustomers.Controls.Add(customers);
+        }
 
-            catalog.Location = new Point(0, 0);
-            customers.Location = new Point(0, 0);
-            catalog.Show();
+        private void ConfigureForm(Form form)
+        {
+            form.TopLevel = false;
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.AutoScaleMode = AutoScaleMode.None;
+            form.Visible = true;
+            form.Font = this.Font;
+            form.Location = new Point(0, 0);
         }
 
         private void LoadMovies()
@@ -87,14 +83,14 @@ namespace HobbyManiaManager
 
         private void buttonCreateCustomer_Click(object sender, EventArgs e)
         {
-            var createCustomer = new CustomerEditForm();
+            var createCustomer = new CustomerEditForm(this);
             createCustomer.ShowDialog();
         }
 
         private void buttonUpdateCustomer_Click(object sender, EventArgs e)
         {
             var c = customersRepository.GetById(1);
-            var form = new CustomerEditForm(c);
+            var form = new CustomerEditForm(this, c);
             form.ShowDialog();
         }
 

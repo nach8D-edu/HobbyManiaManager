@@ -19,7 +19,7 @@ namespace HobbyManiaManager.Forms
         private string loadedAvatarUrl;
         private Form parent;
 
-        public CustomerEditForm(Customer customer = null, Form parent = null)
+        public CustomerEditForm(Form parent, Customer customer = null)
         {
             InitializeComponent();
             this.customer = customer;
@@ -55,10 +55,10 @@ namespace HobbyManiaManager.Forms
             this.textBoxAvatarUrl.Text = customer.Avatar;
             this.Text = $"Customer: {customer.Name}({customer.Id})";
 
-            LoadDataGrid();
+            LoadRentalsDataGrid();
         }
 
-        private void LoadDataGrid()
+        private void LoadRentalsDataGrid()
         {
             this.dataGridViewActiveRentals.DataSource = rentalsRepository.GetCustomerRentals(customer.Id)
                 .Select(c => BuildRentalViewModel(c))
@@ -66,6 +66,9 @@ namespace HobbyManiaManager.Forms
             this.dataGridViewActiveRentals.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewActiveRentals.ReadOnly = true;
             this.dataGridViewActiveRentals.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewActiveRentals.Columns["Rental"].Visible = false;
+            this.dataGridViewActiveRentals.Columns["EndDate"].Visible = false;
+
         }
 
         private RentalDataGridViewModel BuildRentalViewModel(Rental r) {
@@ -162,7 +165,7 @@ namespace HobbyManiaManager.Forms
                 string defaultAvatarUrl = BuildDefaultAvatarUrl();
                 pictureBoxAvatar.Load(defaultAvatarUrl);
                 loadedAvatarUrl = defaultAvatarUrl;
-                Console.WriteLine("Error al cargar la imagen, usando default: " + loadedAvatarUrl);
+                Console.WriteLine("Error loading image, using default: " + loadedAvatarUrl);
             }
         }
 
@@ -189,15 +192,37 @@ namespace HobbyManiaManager.Forms
             if (this.dataGridViewActiveRentals.Rows.Count == 0)
             {
                 string mensaje = "No data to show.";
-                
                 Font font = new Font("Segoe UI", 12, FontStyle.Italic);
                 SizeF textSize = e.Graphics.MeasureString(mensaje, font);
-
                 float x = (dataGridViewActiveRentals.Width - textSize.Width) / 2;
                 float y = (dataGridViewActiveRentals.Height - textSize.Height) / 2;
-
                 e.Graphics.DrawString(mensaje, font, Brushes.Gray, x, y);
             }
+        }
+
+        private void dataGridViewActiveRentals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+           if (e.RowIndex >= 0)
+            {
+                DataGridViewRow selectedRow = dataGridViewActiveRentals.Rows[e.RowIndex];
+                var r = (Rental)selectedRow.Cells["Rental"].Value;
+                var m = movieRepository.GetById(r.MovieId);
+                var customerForm = new RentalForm(m, this);
+                customerForm.ShowDialog();
+            }
+        }
+
+        public override void Refresh()
+        {
+            base.Refresh();
+            LoadRentalsDataGrid();
+            customer = repository.GetById(customer.Id);
+        }
+
+        private void buttonRentalHistory_Click(object sender, EventArgs e)
+        {
+            var rentalHistoryForm = new RentalHistoryForm(customer);
+            rentalHistoryForm.ShowDialog();
         }
     }
 }
