@@ -45,6 +45,7 @@ namespace HobbyManiaManager.Forms
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(textBoxId.Text)) return; //if it is empty or has spaces, do nothing
             dataGridViewCustomersList.DataSource = _repository.GetAll().Where(c => c.Id.ToString() == textBoxId.Text).ToList();
             dataGridViewCustomersList.Refresh();
         }
