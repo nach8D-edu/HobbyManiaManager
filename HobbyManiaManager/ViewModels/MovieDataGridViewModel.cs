@@ -7,11 +7,11 @@ namespace HobbyManiaManager.ViewModels
     {
         public MovieDataGridViewModel(Movie m)
         {
-            this.Id = m.Id;
-            this.Title = m.Title;
-            this.OriginalTitle = m.OriginalTitle;
-            this.ReleaseDate = m.ReleaseDate;
-            this.VoteAverage = Math.Round(m.VoteAverage *10);
+            Id = m.Id;
+            Title = m.Title;
+            OriginalTitle = m.OriginalTitle;
+            ReleaseDate = m.ReleaseDate;
+            VoteAverage = Math.Round(m.VoteAverage *10);
         }
 
         public int Id { get; set; }

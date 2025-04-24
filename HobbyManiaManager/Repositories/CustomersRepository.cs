@@ -74,7 +74,6 @@ namespace HobbyManiaManager
             customer.RegistrationDate = updatedCustomer.RegistrationDate;
             customer.Email = updatedCustomer.Email;
             customer.Avatar = updatedCustomer.Avatar;
-            // TODO: History??
             Console.Write(customer);
         }
     }

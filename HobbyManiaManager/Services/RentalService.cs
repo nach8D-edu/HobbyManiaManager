@@ -6,27 +6,32 @@ namespace HobbyManiaManager
 {
     public class RentalService
     {
-        public MoviesRepository moviesRepository;
-        public RentalsRepository rentalsRepository;
-        public CustomersRepository customersRepository;
+        public readonly MoviesRepository _moviesRepository;
+        public readonly RentalsRepository _rentalsRepository;
+        public readonly CustomersRepository _customersRepository;
 
         public RentalService()
         {
-            moviesRepository = MoviesRepository.Instance;
-            rentalsRepository = RentalsRepository.Instance;
-            customersRepository = CustomersRepository.Instance;
+            _moviesRepository = MoviesRepository.Instance;
+            _rentalsRepository = RentalsRepository.Instance;
+            _customersRepository = CustomersRepository.Instance;
         }
 
         public void Rent(Customer customer, Movie movie, string notes = null, DateTime? startDate = null)
         {
+            if (!IsAvailable(movie))
+            {
+                throw new InvalidOperationException("This movie is already rented.");
+            }
             var rental = new Rental(movie.Id, customer.Id, notes, startDate);
-            rentalsRepository.Add(rental);
+            _rentalsRepository.Add(rental);
             Log();
         }
 
+
         public void FinishRental(Customer customer, Movie movie, string notes)
         {
-            var rentals = rentalsRepository.GetCustomerRentals(customer.Id);
+            var rentals = _rentalsRepository.GetCustomerRentals(customer.Id);
 
             var rental = rentals.Find(r => r.MovieId == movie.Id);
             if (rental == null)
@@ -37,21 +42,21 @@ namespace HobbyManiaManager
             rental.EndDate = DateTime.Now;
             rental.Notes = notes;
 
-            customersRepository.AddRentalToHistory(customer.Id, rental);
-            rentalsRepository.Remove(rental);
+            _customersRepository.AddRentalToHistory(customer.Id, rental);
+            _rentalsRepository.Remove(rental);
             Log();
         }
 
         private void Log()
         {
-            foreach (var rental in rentalsRepository.GetAll())
+            foreach (var rental in _rentalsRepository.GetAll())
             {
                 Console.Write(rental.ToString());
             }
 
             Console.WriteLine("");
 
-            foreach (var customers in customersRepository.GetAll())
+            foreach (var customers in _customersRepository.GetAll())
             {
                 Console.Write(customers.ToString());
             }
@@ -59,12 +64,12 @@ namespace HobbyManiaManager
 
         public bool IsAvailable(Movie movie)
         {
-            return !rentalsRepository.GetAll().Exists(r => r.MovieId == movie.Id);
+            return !_rentalsRepository.GetAll().Exists(r => r.MovieId == movie.Id);
         }
 
-        internal Rental GetMovieRental(int id)
+        public Rental GetMovieRental(int id)
         {
-            return rentalsRepository.GetAll().Find(r => r.MovieId == id);
+            return _rentalsRepository.GetAll().Find(r => r.MovieId == id);
         }
     }
 }

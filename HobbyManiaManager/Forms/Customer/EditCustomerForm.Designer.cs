@@ -1,6 +1,6 @@
 ﻿namespace HobbyManiaManager.Forms
 {
-    partial class CustomerEditForm
+    partial class EditCustomerForm
     {
         /// <summary>
         /// Required designer variable.

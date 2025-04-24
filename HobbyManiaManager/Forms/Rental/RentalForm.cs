@@ -7,24 +7,25 @@ namespace HobbyManiaManager.Forms
 {
     public partial class RentalForm : Form
     {
-        private CustomersRepository _customersRepository;
-        private RentalService _rentalService;
+        private readonly CustomersRepository _customersRepository;
+        private readonly RentalService _rentalService;
+        private readonly Control _parent;
+
         private Rental _rental;
         private Movie _movie;
         private Customer _customer;
-        private Control _parent;
 
         public RentalForm(Movie movie, Control parent)
         {
             InitializeComponent();
-            this._customersRepository = CustomersRepository.Instance;
-            this._rentalService = new RentalService();
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            _customersRepository = CustomersRepository.Instance;
+            _rentalService = new RentalService();
+            FormBorderStyle = FormBorderStyle.FixedDialog;
 
-            this._movie = movie;
-            this._parent = parent;
+            _movie = movie;
+            _parent = parent;
 
-            this._rental = _rentalService.GetMovieRental(movie.Id);
+            _rental = _rentalService.GetMovieRental(movie.Id);
             if (_rental != null) {
                 var c = _customersRepository.GetById(_rental.CustomerId);
                 if (c == null) { 
@@ -33,18 +34,18 @@ namespace HobbyManiaManager.Forms
                 this._customer = c;
             }
 
-            this.dateTimePickerEnd.Format = DateTimePickerFormat.Custom;
-            this.dateTimePickerStartDate.Format = DateTimePickerFormat.Custom;
-            this.dateTimePickerEnd.CustomFormat = "dd/MM/yyyy HH:mm";
-            this.dateTimePickerStartDate.CustomFormat = "dd/MM/yyyy HH:mm";
+            dateTimePickerEnd.Format = DateTimePickerFormat.Custom;
+            dateTimePickerStartDate.Format = DateTimePickerFormat.Custom;
+            dateTimePickerEnd.CustomFormat = "dd/MM/yyyy HH:mm";
+            dateTimePickerStartDate.CustomFormat = "dd/MM/yyyy HH:mm";
         }
 
         private void RentalForm_Load(object sender, EventArgs e)
         {
-            this.pictureBoxMoviePoster.Load(_movie.PosterUrl(200));
-            this.labelMovieTitle.Text = _movie.Title;
-            this.labelMovieTitle.MaximumSize = new Size(300, 0);
-            this.labelMovieTitle.AutoSize = true;
+            pictureBoxMoviePoster.Load(_movie.PosterUrl(200));
+            labelMovieTitle.Text = _movie.Title;
+            labelMovieTitle.MaximumSize = new Size(300, 0);
+            labelMovieTitle.AutoSize = true;
 
             if (_customer != null)
             {
@@ -54,40 +55,40 @@ namespace HobbyManiaManager.Forms
             else {
                 SelectCustomer();
                 var t = _movie.Title.Length > 50 ? _movie.Title.Substring(0, 50) + "..." : _movie.Title;
-                this.Text = $"Rental: {t}";
-                this.buttonStartEnd.Enabled = false;
+                Text = $"Rental: {t}";
+                buttonStartEnd.Enabled = false;
             }
-            this.textBoxRentalNotes.Text = _rental?.Notes;
+            textBoxRentalNotes.Text = _rental?.Notes;
 
             if (_rental != null)
             {
-                this.buttonStartEnd.Text = "End Rental";
-                this.dateTimePickerStartDate.Value = _rental.StartDate;
-                this.dateTimePickerStartDate.Enabled = false;
+                buttonStartEnd.Text = "End Rental";
+                dateTimePickerStartDate.Value = _rental.StartDate;
+                dateTimePickerStartDate.Enabled = false;
             }
             else {
-                this.dateTimePickerEnd.Visible = false;
-                this.labelEndDate.Visible = false;
+                dateTimePickerEnd.Visible = false;
+                labelEndDate.Visible = false;
             }
         }
 
         private void LoadCustomer()
         {
             var t = _movie.Title.Length > 50 ? _movie.Title.Substring(0, 50) + "..." : _movie.Title;
-            this.Text = $"Rental: {t} from {_customer.Name}({_customer.Id})";
-            this.pictureBoxCustomerAvatar.Load(_customer.Avatar);
-            this.labelCustomerName.Text = _customer.Name;
-            this.labelCustomerName.MaximumSize = new Size(300, 0);
-            this.labelCustomerName.AutoSize = true;
-            this.buttonStartEnd.Enabled = true;
-            this.textBoxId.Text = _customer.Id.ToString();
-            this.labelCustomerName.Enabled = true;
+            Text = $"Rental: {t} from {_customer.Name}({_customer.Id})";
+            pictureBoxCustomerAvatar.Load(_customer.Avatar);
+            labelCustomerName.Text = _customer.Name;
+            labelCustomerName.MaximumSize = new Size(300, 0);
+            labelCustomerName.AutoSize = true;
+            buttonStartEnd.Enabled = true;
+            textBoxId.Text = _customer.Id.ToString();
+            labelCustomerName.Enabled = true;
         }
 
         private void groupBoxRental_Enter(object sender, EventArgs e)
         {
-            this.textBoxRentalNotes.ScrollBars = ScrollBars.Vertical;
-            this.textBoxRentalNotes.WordWrap = true;
+            textBoxRentalNotes.ScrollBars = ScrollBars.Vertical;
+            textBoxRentalNotes.WordWrap = true;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -108,10 +109,10 @@ namespace HobbyManiaManager.Forms
 
         private void SelectCustomer()
         {
-            this.buttonStartEnd.Enabled = false;
-            this.labelCustomerName.Text = "Select customer";
-            this.labelCustomerName.Enabled = false;
-            this.pictureBoxCustomerAvatar.Load(Customer.UnknownAvatar);
+            buttonStartEnd.Enabled = false;
+            labelCustomerName.Text = "Select customer";
+            labelCustomerName.Enabled = false;
+            pictureBoxCustomerAvatar.Load(Customer.UnknownAvatar);
         }
 
         private void buttonStartEnd_Click(object sender, EventArgs e)

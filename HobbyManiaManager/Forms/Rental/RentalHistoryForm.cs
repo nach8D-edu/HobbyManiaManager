@@ -8,7 +8,7 @@ namespace HobbyManiaManager.Forms
 {
     public partial class RentalHistoryForm : Form
     {
-        private MoviesRepository _movieRepository;
+        private readonly MoviesRepository _movieRepository;
 
         public RentalHistoryForm(Customer customer)
         {

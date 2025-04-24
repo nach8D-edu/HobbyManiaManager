@@ -11,11 +11,11 @@ namespace HobbyManiaManager.ViewModels
             if (m.Id != r.MovieId) {
                 throw new ArgumentException("Rental object is not associated with the given Movie.", nameof(r));
             }
-            this.Rental = r;
-            this.Movie = $"{m.Id} - {m.Title}";
-            this.StartDate = r.StartDate;
-            this.EndDate = r?.EndDate;
-            this.Notes = r.Notes;
+            Rental = r;
+            Movie = $"{m.Id} - {m.Title}";
+            StartDate = r.StartDate;
+            EndDate = r?.EndDate;
+            Notes = r.Notes;
         }
 
         public Rental Rental { get; set; }

@@ -10,7 +10,6 @@ namespace HobbyManiaManager
         private static MoviesRepository instance;
         private Dictionary<int, Movie> movies;
 
-
         private MoviesRepository() {
             movies = new Dictionary<int, Movie>();
         }

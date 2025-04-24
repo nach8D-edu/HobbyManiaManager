@@ -59,36 +59,36 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\CatalogForm.cs">
+    <Compile Include="Forms\Movie\CatalogForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CatalogForm.Designer.cs">
+    <Compile Include="Forms\Movie\CatalogForm.Designer.cs">
       <DependentUpon>CatalogForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CustomerEditForm.cs">
+    <Compile Include="Forms\Customer\EditCustomerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CustomerEditForm.Designer.cs">
-      <DependentUpon>CustomerEditForm.cs</DependentUpon>
+    <Compile Include="Forms\Customer\EditCustomerForm.Designer.cs">
+      <DependentUpon>EditCustomerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CustomersListForm.cs">
+    <Compile Include="Forms\Customer\ListCustomersForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CustomersListForm.Designer.cs">
-      <DependentUpon>CustomersListForm.cs</DependentUpon>
+    <Compile Include="Forms\Customer\ListCustomersForm.Designer.cs">
+      <DependentUpon>ListCustomersForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\RentalHistoryForm.cs">
+    <Compile Include="Forms\Rental\RentalHistoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\RentalHistoryForm.Designer.cs">
+    <Compile Include="Forms\Rental\RentalHistoryForm.Designer.cs">
       <DependentUpon>RentalHistoryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\RandomCustomerGenerator.cs" />
     <Compile Include="ViewModels\MovieDataGridViewModel.cs" />
-    <Compile Include="Forms\RentalForm.cs">
+    <Compile Include="Forms\Rental\RentalForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\RentalForm.Designer.cs">
+    <Compile Include="Forms\Rental\RentalForm.Designer.cs">
       <DependentUpon>RentalForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs" />
@@ -106,32 +106,32 @@
     <Compile Include="Models\Rental.cs" />
     <Compile Include="Repositories\RentalsRepository.cs" />
     <Compile Include="Services\RentalService.cs" />
-    <Compile Include="Forms\MovieUserControl.cs">
+    <Compile Include="Forms\Movie\MovieUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\MovieUserControl.Designer.cs">
+    <Compile Include="Forms\Movie\MovieUserControl.Designer.cs">
       <DependentUpon>MovieUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\RentalDataGridViewModel.cs" />
-    <EmbeddedResource Include="Forms\CatalogForm.resx">
+    <EmbeddedResource Include="Forms\Movie\CatalogForm.resx">
       <DependentUpon>CatalogForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CustomerEditForm.resx">
-      <DependentUpon>CustomerEditForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Customer\EditCustomerForm.resx">
+      <DependentUpon>EditCustomerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CustomersListForm.resx">
-      <DependentUpon>CustomersListForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Customer\ListCustomersForm.resx">
+      <DependentUpon>ListCustomersForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MovieUserControl.resx">
+    <EmbeddedResource Include="Forms\Movie\MovieUserControl.resx">
       <DependentUpon>MovieUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RentalForm.resx">
+    <EmbeddedResource Include="Forms\Rental\RentalForm.resx">
       <DependentUpon>RentalForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RentalHistoryForm.resx">
+    <EmbeddedResource Include="Forms\Rental\RentalHistoryForm.resx">
       <DependentUpon>RentalHistoryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

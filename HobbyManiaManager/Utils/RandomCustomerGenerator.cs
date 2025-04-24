@@ -7,7 +7,6 @@ namespace HobbyManiaManager.Utils
     {
 
         private readonly Random _random;
-        private readonly int _seed;
 
         private static readonly string[] FirstNames = new[]
         {
@@ -40,8 +39,8 @@ namespace HobbyManiaManager.Utils
 
         public void Generate()
         {
-            string firstName = FirstNames[_random.Next(FirstNames.Length)];
-            string lastName = LastNames[_random.Next(LastNames.Length)];
+            var firstName = FirstNames[_random.Next(FirstNames.Length)];
+            var lastName = LastNames[_random.Next(LastNames.Length)];
 
             FullName = $"{firstName} {lastName}";
             Email = $"{firstName.ToLower()}.{lastName.ToLower()}@xtec.cat";
