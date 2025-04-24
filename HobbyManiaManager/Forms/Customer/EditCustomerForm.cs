@@ -36,6 +36,7 @@ namespace HobbyManiaManager.Forms
             if (_customer == null)
             {
                 CreateCustomerLoad();
+                buttonRentalHistory.Enabled = false; //Disable the rent button when creating a user
             }
             else
             {
