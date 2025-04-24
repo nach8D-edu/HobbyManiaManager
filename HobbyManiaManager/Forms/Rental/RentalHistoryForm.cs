@@ -40,5 +40,10 @@ namespace HobbyManiaManager.Forms
             }
             return new RentalDataGridViewModel(m, r);
         }
+
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            Dispose();
+        }
     }
 }
