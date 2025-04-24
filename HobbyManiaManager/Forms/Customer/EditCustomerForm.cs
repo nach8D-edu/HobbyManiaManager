@@ -84,7 +84,9 @@ namespace HobbyManiaManager.Forms
 
         private void CreateCustomerLoad()
         {
-            textBoxId.Text = (_customersRepository.GetAll().Last().Id + 1).ToString();
+            textBoxId.Text = "0";
+            textBoxId.Visible = false;
+            labelId.Visible = false;
             dateTimePickerRegDate.Value = DateTime.Now;
             Text = "Create New Customer";
 
@@ -113,6 +115,7 @@ namespace HobbyManiaManager.Forms
         private void CreateCustomer()
         {
             var newCustomer = GetFormCustomer();
+            newCustomer.Id = Customer.NextCustomerId;
             _customersRepository.Add(newCustomer);
             buttonUpdateCreate.Text = "Update";
         }
