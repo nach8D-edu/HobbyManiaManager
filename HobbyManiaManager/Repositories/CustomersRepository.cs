@@ -8,6 +8,7 @@ namespace HobbyManiaManager
     public class CustomersRepository
     {
         private static CustomersRepository instance;
+        //  TODO Change it to Dictionary
         private List<Customer> customers;
 
         private CustomersRepository()
