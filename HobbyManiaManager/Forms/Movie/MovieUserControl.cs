@@ -82,15 +82,5 @@ namespace HobbyManiaManager
             var rentalForm = new RentalForm(Movie, this);
             rentalForm.ShowDialog();
         }
-
-        private void MovieUserControl_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MovieUserControl_Load_1(object sender, EventArgs e)
-        {
-
-        }
     }
 }

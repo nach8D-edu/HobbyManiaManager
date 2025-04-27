@@ -48,10 +48,5 @@ namespace HobbyManiaManager
                 movieUserControl.Load(selected);
             }
         }
-
-        private void dataGridViewMoviesList_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
 }

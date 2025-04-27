@@ -28,8 +28,8 @@ namespace HobbyManiaManager.Forms
             _rental = _rentalService.GetMovieRental(movie.Id);
             if (_rental != null) {
                 var c = _customersRepository.GetById(_rental.CustomerId);
-                if (c == null) { 
-                    // exception
+                if (c == null) {
+                    throw new InvalidOperationException($"No customer found with ID {_rental.CustomerId}.");
                 }
                 this._customer = c;
             }

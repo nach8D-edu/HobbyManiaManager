@@ -67,7 +67,6 @@ namespace HobbyManiaManager
                 var movies = JsonConvert.DeserializeObject<List<Movie>>(json);
                 if (movies != null)
                 {
-                    //_moviesRepository.AddAll(movies);
                     _moviesRepository.AddAll(movies.Where(m => m.Status.ToLower().Equals("released")).ToList());
                 }
                 else
