@@ -93,9 +93,8 @@ namespace HobbyManiaManager.Forms
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            var c = int.TryParse(this.textBoxId.Text, out var id)
-                ? _customersRepository.GetById(id)
-                : null;
+            var c = int.TryParse(this.textBoxId.Text, out var id) ? TryGetCustomer(id) : null;
+
             if (c != null)
             {
                 this._customer = c;
@@ -104,6 +103,18 @@ namespace HobbyManiaManager.Forms
             else
             {
                 SelectCustomer();
+            }
+        }
+
+        private Customer TryGetCustomer(int id)
+        {
+            try
+            {
+                return _customersRepository.GetById(id);
+            }
+            catch (Exception)
+            {
+                return null;
             }
         }
 
