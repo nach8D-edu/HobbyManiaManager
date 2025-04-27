@@ -62,7 +62,7 @@ namespace HobbyManiaManager
         {
             try
             {
-                string filePath = "Resources/tmdb_random_movies_with_directors.json";
+                string filePath = "Resources/tmdb_movies.json";
                 string json = File.ReadAllText(filePath);
                 var movies = JsonConvert.DeserializeObject<List<Movie>>(json);
                 if (movies != null)

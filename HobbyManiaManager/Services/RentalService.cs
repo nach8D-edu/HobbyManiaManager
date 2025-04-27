@@ -29,7 +29,7 @@ namespace HobbyManiaManager
         }
 
 
-        public void FinishRental(Customer customer, Movie movie, string notes)
+        public void FinishRental(Customer customer, Movie movie, string notes, DateTime endDate)
         {
             var rentals = _rentalsRepository.GetCustomerRentals(customer.Id);
 
@@ -39,7 +39,7 @@ namespace HobbyManiaManager
                 throw new Exception($"There is no active rental for movieId={movie.Id} from customerId={customer.Id}");
             }
 
-            rental.EndDate = DateTime.Now;
+            rental.EndDate = endDate;
             rental.Notes = notes;
 
             _customersRepository.AddRentalToHistory(customer.Id, rental);

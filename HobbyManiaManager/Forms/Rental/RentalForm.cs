@@ -133,7 +133,7 @@ namespace HobbyManiaManager.Forms
             }
             else {
                 // Ending an existing rental
-                _rentalService.FinishRental(_customer, _movie, this.textBoxRentalNotes.Text);
+                _rentalService.FinishRental(_customer, _movie, this.textBoxRentalNotes.Text, dateTimePickerEnd.Value);
                 MessageBox.Show($"Rent finished for movie: {_movie.Title}.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             this._parent?.Refresh();
