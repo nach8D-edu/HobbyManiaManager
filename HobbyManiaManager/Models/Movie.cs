@@ -7,21 +7,25 @@ namespace HobbyManiaManager.Models
 {
     public class Movie : ICloneable
     {
-        
+
         private const string BaseImageUrl = "https://image.tmdb.org/t/p/w342";
 
         public int Id { get; set; }
 
         public string Title { get; set; }
 
+        public string Director { get; set; }
+
         [JsonProperty("original_title")]
         public string OriginalTitle { get; set; }
 
         [JsonProperty("release_date")]
         public DateTime ReleaseDate { get; set; }
-        
+
+        public string Status { get; set; }
+
         public string Overview { get; set; }
-        
+
         [JsonProperty("poster_path")]
         public string PosterPath { get; set; }
 
@@ -38,14 +42,10 @@ namespace HobbyManiaManager.Models
         [JsonProperty("vote_count")]
         public int VoteCount { get; set; }
 
-        [JsonProperty("genre_ids")]
-        public List<int> GenreIds { get; set; }
+        [JsonProperty("genres")]
+        public List<Genre> Genres { get; set; }
 
-        [JsonIgnore]
-        public List<Genre> Genres => GenreIds
-            .Where(id => Enum.IsDefined(typeof(Genre), id))
-            .Select(id => (Genre)id)
-            .ToList();
+        public string GenresAsSting => string.Join(", ", Genres.Select(g => g.Name));
 
         public object Clone()
         {
@@ -53,38 +53,26 @@ namespace HobbyManiaManager.Models
             {
                 Id = this.Id,
                 Title = this.Title,
+                Director = this.Director,
                 OriginalTitle = this.OriginalTitle,
                 ReleaseDate = this.ReleaseDate,
+                Status = this.Status,
                 Overview = this.Overview,
                 PosterPath = this.PosterPath,
                 BackdropPath = this.BackdropPath,
                 VoteAverage = this.VoteAverage,
                 VoteCount = this.VoteCount,
-                GenreIds = new List<int>(this.GenreIds)
-            };
+                Genres = this.Genres?.Select(g => new Genre { Id = g.Id, Name = g.Name }).ToList()
+             };
         }
 
-        public enum Genre
+        public class Genre
         {
-            Action = 28,
-            Adventure = 12,
-            Animation = 16,
-            Comedy = 35,
-            Crime = 80,
-            Documentary = 99,
-            Drama = 18,
-            Family = 10751,
-            Fantasy = 14,
-            History = 36,
-            Horror = 27,
-            Music = 10402,
-            Mystery = 9648,
-            Romance = 10749,
-            ScienceFiction = 878,
-            TVMovie = 10770,
-            Thriller = 53,
-            War = 10752,
-            Western = 37
+            [JsonProperty("id")]
+            public int Id { get; set; }
+
+            [JsonProperty("name")]
+            public string Name { get; set; }
         }
     }
 }

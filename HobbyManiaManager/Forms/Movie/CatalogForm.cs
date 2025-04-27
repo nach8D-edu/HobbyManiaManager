@@ -18,7 +18,7 @@ namespace HobbyManiaManager
 
         private void CatalogForm_Load(object sender, EventArgs e)
         {
-            movieUserControl.Load(_moviesRepository.GetById(238));
+            movieUserControl.Load(_moviesRepository.GetAll().First());
 
             dataGridViewMoviesList.DataSource = _moviesRepository.GetAll()
                 .Select(m => new MovieDataGridViewModel(m))
@@ -47,6 +47,11 @@ namespace HobbyManiaManager
                 var selected = _moviesRepository.GetById(id);
                 movieUserControl.Load(selected);
             }
+        }
+
+        private void dataGridViewMoviesList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

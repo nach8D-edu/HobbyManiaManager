@@ -40,6 +40,7 @@
             this.dataGridViewMoviesList.Name = "dataGridViewMoviesList";
             this.dataGridViewMoviesList.Size = new System.Drawing.Size(907, 268);
             this.dataGridViewMoviesList.TabIndex = 1;
+            this.dataGridViewMoviesList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewMoviesList_CellContentClick);
             this.dataGridViewMoviesList.SelectionChanged += new System.EventHandler(this.dataGridViewMoviesList_SelectionChanged);
             // 
             // movieUserControl

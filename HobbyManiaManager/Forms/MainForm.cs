@@ -7,6 +7,7 @@ using HobbyManiaManager.Models;
 using HobbyManiaManager.Forms;
 using System.Drawing;
 using HobbyManiaManager.Utils;
+using System.Linq;
 
 namespace HobbyManiaManager
 {
@@ -61,12 +62,13 @@ namespace HobbyManiaManager
         {
             try
             {
-                string filePath = "Resources/tmdb_top_movies_small.json";
+                string filePath = "Resources/tmdb_random_movies_with_directors.json";
                 string json = File.ReadAllText(filePath);
                 var movies = JsonConvert.DeserializeObject<List<Movie>>(json);
                 if (movies != null)
                 {
-                    _moviesRepository.AddAll(movies);
+                    //_moviesRepository.AddAll(movies);
+                    _moviesRepository.AddAll(movies.Where(m => m.Status.ToLower().Equals("released")).ToList());
                 }
                 else
                 {
