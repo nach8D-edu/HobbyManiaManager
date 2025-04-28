@@ -1,4 +1,4 @@
-# Hobby Mania Manager
+# Examen Aplazado!!
 <p align="center">
   <img src="https://github.com/user-attachments/assets/5185d46a-3f48-428c-be32-c993bc989135" width="50%">
 </p>
