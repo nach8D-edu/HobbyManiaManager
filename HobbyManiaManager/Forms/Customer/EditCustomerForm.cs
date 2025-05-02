@@ -147,6 +147,14 @@ namespace HobbyManiaManager.Forms
 
         private void textBoxName_TextChanged(object sender, EventArgs e)
         {
+            if (!string.IsNullOrWhiteSpace(textBoxName.Text))
+            {
+                buttonUpdateCreate.Enabled = true;
+            }
+            else 
+            {
+                buttonUpdateCreate.Enabled = false;
+            }
             RefreshDefaultProfilePic();
         }
 

@@ -202,6 +202,7 @@
             // 
             // buttonUpdateCreate
             // 
+            this.buttonUpdateCreate.Enabled = false;
             this.buttonUpdateCreate.Location = new System.Drawing.Point(604, 466);
             this.buttonUpdateCreate.Name = "buttonUpdateCreate";
             this.buttonUpdateCreate.Size = new System.Drawing.Size(75, 27);
@@ -241,7 +242,7 @@
             this.buttonRentalHistory.UseVisualStyleBackColor = true;
             this.buttonRentalHistory.Click += new System.EventHandler(this.buttonRentalHistory_Click);
             // 
-            // CustomerEditForm
+            // EditCustomerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -253,7 +254,7 @@
             this.Controls.Add(this.groupBoxProfile);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
-            this.Name = "CustomerEditForm";
+            this.Name = "EditCustomerForm";
             this.Text = "CustomerEditForm";
             this.Load += new System.EventHandler(this.CustomerEditForm_Load);
             this.groupBoxProfile.ResumeLayout(false);
