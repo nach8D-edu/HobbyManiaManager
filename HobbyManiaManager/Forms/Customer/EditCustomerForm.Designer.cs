@@ -47,6 +47,8 @@
             this.groupBoxActiveRentals = new System.Windows.Forms.GroupBox();
             this.dataGridViewActiveRentals = new System.Windows.Forms.DataGridView();
             this.buttonRentalHistory = new System.Windows.Forms.Button();
+            this.labelMandatoryInput = new System.Windows.Forms.Label();
+            this.labelMandatoryFieldInfo = new System.Windows.Forms.Label();
             this.groupBoxProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAvatar)).BeginInit();
             this.groupBoxActiveRentals.SuspendLayout();
@@ -55,6 +57,8 @@
             // 
             // groupBoxProfile
             // 
+            this.groupBoxProfile.Controls.Add(this.labelMandatoryFieldInfo);
+            this.groupBoxProfile.Controls.Add(this.labelMandatoryInput);
             this.groupBoxProfile.Controls.Add(this.textBoxAvatarUrl);
             this.groupBoxProfile.Controls.Add(this.labelAvatarUrl);
             this.groupBoxProfile.Controls.Add(this.pictureBoxAvatar);
@@ -242,6 +246,25 @@
             this.buttonRentalHistory.UseVisualStyleBackColor = true;
             this.buttonRentalHistory.Click += new System.EventHandler(this.buttonRentalHistory_Click);
             // 
+            // labelMandatoryInput
+            // 
+            this.labelMandatoryInput.AutoSize = true;
+            this.labelMandatoryInput.Location = new System.Drawing.Point(159, 69);
+            this.labelMandatoryInput.Name = "labelMandatoryInput";
+            this.labelMandatoryInput.Size = new System.Drawing.Size(15, 20);
+            this.labelMandatoryInput.TabIndex = 13;
+            this.labelMandatoryInput.Text = "*";
+            // 
+            // labelMandatoryFieldInfo
+            // 
+            this.labelMandatoryFieldInfo.AutoSize = true;
+            this.labelMandatoryFieldInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.labelMandatoryFieldInfo.Location = new System.Drawing.Point(653, 190);
+            this.labelMandatoryFieldInfo.Name = "labelMandatoryFieldInfo";
+            this.labelMandatoryFieldInfo.Size = new System.Drawing.Size(85, 13);
+            this.labelMandatoryFieldInfo.TabIndex = 14;
+            this.labelMandatoryFieldInfo.Text = "(*) Required field";
+            // 
             // EditCustomerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -287,5 +310,7 @@
         private System.Windows.Forms.GroupBox groupBoxActiveRentals;
         private System.Windows.Forms.DataGridView dataGridViewActiveRentals;
         private System.Windows.Forms.Button buttonRentalHistory;
+        private System.Windows.Forms.Label labelMandatoryInput;
+        private System.Windows.Forms.Label labelMandatoryFieldInfo;
     }
 }
