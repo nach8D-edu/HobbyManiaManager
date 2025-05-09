@@ -43,7 +43,8 @@ namespace HobbyManiaManager.Forms
 
         private void buttonClose_Click(object sender, EventArgs e)
         {
-            Dispose();
+            this.Close();
+            
         }
     }
 }
