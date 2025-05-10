@@ -25,6 +25,8 @@ namespace HobbyManiaManager
                 .ToList();
 
             ConfigureMoviesDatagrid();
+            RefreshMoviesGrid();
+            movieUserControl._refreshAction = () => RefreshMoviesGrid();
         }
 
         private void ConfigureMoviesDatagrid()
@@ -47,6 +49,13 @@ namespace HobbyManiaManager
                 var selected = _moviesRepository.GetById(id);
                 movieUserControl.Load(selected);
             }
+        }
+
+        private void RefreshMoviesGrid()
+        {
+            dataGridViewMoviesList.DataSource = _moviesRepository.GetAll()
+                .Select(m => new MovieDataGridViewModel(m))
+                .ToList();
         }
     }
 }
