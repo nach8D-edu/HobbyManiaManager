@@ -13,7 +13,7 @@ namespace HobbyManiaManager
         private Movie Movie;
         private RentalService _service;
         private CustomersRepository _customersRepository;
-        private Action _refreshDataGridView;
+        public Action _refreshAction;
 
         public MovieUserControl()
         {
@@ -84,16 +84,11 @@ namespace HobbyManiaManager
             CheckAvailability(Movie);
         }
 
-        public void SetRefreshAction(Action refreshAction)
-        {
-            _refreshDataGridView = refreshAction;
-        }
-
         private void buttonStartEndRent_Click(object sender, EventArgs e)
         {
             var rentalForm = new RentalForm(Movie, this);
             rentalForm.ShowDialog();
-            _refreshDataGridView?.Invoke();
+            _refreshAction?.Invoke();
             this.Refresh();
         }
     }
