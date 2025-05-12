@@ -45,6 +45,9 @@ namespace HobbyManiaManager.Models
         [JsonProperty("genres")]
         public List<Genre> Genres { get; set; }
 
+        [JsonProperty("imdb_id")]
+        public string ImdbId { get; set; }
+
         public string GenresAsSting => string.Join(", ", Genres.Select(g => g.Name));
 
         public object Clone()
@@ -62,6 +65,7 @@ namespace HobbyManiaManager.Models
                 BackdropPath = this.BackdropPath,
                 VoteAverage = this.VoteAverage,
                 VoteCount = this.VoteCount,
+                ImdbId = this.ImdbId,
                 Genres = this.Genres?.Select(g => new Genre { Id = g.Id, Name = g.Name }).ToList()
              };
         }

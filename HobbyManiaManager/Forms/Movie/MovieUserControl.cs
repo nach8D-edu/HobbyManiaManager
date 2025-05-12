@@ -88,5 +88,20 @@ namespace HobbyManiaManager
             var rentalForm = new RentalForm(Movie, this);
             rentalForm.ShowDialog();
         }
+
+        private void btnImdb_Click(object sender, EventArgs e)
+        {
+
+            if (!string.IsNullOrEmpty(Movie.ImdbId))
+            {
+
+                string imdbUrl = $"https://www.imdb.com/es-es/title/{Movie.ImdbId}";
+
+
+                var imdbForm = new ImdbForm(imdbUrl, Movie.Title);
+                imdbForm.ShowDialog();
+            }
+
+        }
     }
 }
