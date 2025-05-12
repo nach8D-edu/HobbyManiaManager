@@ -21,8 +21,6 @@ namespace HobbyManiaManager.Forms
 
         private void LoadImdbPage(string imdbUrl)
         {
-
-
             webView21.CoreWebView2InitializationCompleted += (s, e) =>
             {
                 if (webView21.CoreWebView2 != null)
@@ -30,8 +28,7 @@ namespace HobbyManiaManager.Forms
                     webView21.CoreWebView2.Navigate(imdbUrl);
                 }
             };
-
-            
+ 
             webView21.EnsureCoreWebView2Async();
         }
     }

@@ -55,6 +55,9 @@ namespace HobbyManiaManager
             this.labelVotesCount.Location = new Point(this.labelVotesCount.Location.X, this.circularProgressBarVotes.Bottom + 5);
 
             CheckAvailability(movie);
+
+            this.btnImdb.Enabled = !string.IsNullOrEmpty(Movie?.ImdbId);
+
             this.Refresh();
         }
 
@@ -91,17 +94,13 @@ namespace HobbyManiaManager
 
         private void btnImdb_Click(object sender, EventArgs e)
         {
-
             if (!string.IsNullOrEmpty(Movie.ImdbId))
             {
-
                 string imdbUrl = $"https://www.imdb.com/es-es/title/{Movie.ImdbId}";
-
 
                 var imdbForm = new ImdbForm(imdbUrl, Movie.Title);
                 imdbForm.ShowDialog();
             }
-
         }
     }
 }
