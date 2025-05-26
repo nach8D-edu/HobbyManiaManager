@@ -1,10 +1,7 @@
 # Hobby Mania Manager
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/3c934d18-d8ce-4e3e-9538-a5221a1d80c2" width="50%">
+  <img src="https://github.com/user-attachments/assets/3c934d18-d8ce-4e3e-9538-a5221a1d80c2" width="80%">
 </p>
-
-![image](https://github.com/user-attachments/assets/3c934d18-d8ce-4e3e-9538-a5221a1d80c2)
-
 
 This is a simple desktop application developed as part of the **"User Interface Design"** course.  
 The project was created using **Visual Studio 2022** and implemented with **Windows Forms (.NET)**.
