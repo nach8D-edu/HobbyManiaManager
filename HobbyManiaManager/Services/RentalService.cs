@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using HobbyManiaManager.Models;
 using HobbyManiaManager.Repositories;
 
@@ -70,6 +72,11 @@ namespace HobbyManiaManager
         public Rental GetMovieRental(int id)
         {
             return _rentalsRepository.GetAll().Find(r => r.MovieId == id);
+        }
+
+        public List<Rental> GetActiveRentals(int customerId)
+        {
+            return _rentalsRepository.GetAll().Where(r =>r.CustomerId == customerId).ToList();
         }
     }
 }

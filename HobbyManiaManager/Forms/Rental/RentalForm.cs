@@ -50,13 +50,17 @@ namespace HobbyManiaManager.Forms
             if (_customer != null)
             {
                 LoadCustomer();
-                this.textBoxId.Enabled = false;
+                labelId.Text = $"ID: {_customer.Id}";
+                this.textBoxId.Visible = false;
+                buttonStartEnd.Enabled = true;
             }
             else {
                 SelectCustomer();
+                labelId.Text = $"ID:";
                 var t = _movie.Title.Length > 50 ? _movie.Title.Substring(0, 50) + "..." : _movie.Title;
                 Text = $"Rental: {t}";
                 buttonStartEnd.Enabled = false;
+                this.textBoxId.Visible = true;
             }
             textBoxRentalNotes.Text = _rental?.Notes;
 
@@ -76,12 +80,12 @@ namespace HobbyManiaManager.Forms
         {
             var t = _movie.Title.Length > 50 ? _movie.Title.Substring(0, 50) + "..." : _movie.Title;
             Text = $"Rental: {t} from {_customer.Name}({_customer.Id})";
+
             pictureBoxCustomerAvatar.Load(_customer.Avatar);
             labelCustomerName.Text = _customer.Name;
             labelCustomerName.MaximumSize = new Size(300, 0);
             labelCustomerName.AutoSize = true;
             buttonStartEnd.Enabled = true;
-            textBoxId.Text = _customer.Id.ToString();
             labelCustomerName.Enabled = true;
         }
 
@@ -94,7 +98,6 @@ namespace HobbyManiaManager.Forms
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             var c = int.TryParse(this.textBoxId.Text, out var id) ? TryGetCustomer(id) : null;
-
             if (c != null)
             {
                 this._customer = c;

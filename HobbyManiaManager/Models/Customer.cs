@@ -15,6 +15,7 @@ namespace HobbyManiaManager.Models
         public string PhoneNumber { get; set; }
         public DateTime RegistrationDate { get; set; }
         public List<Rental> RentalsHistory { get; set; } = new List<Rental>();
+        public int RentalsFinishedCount => RentalsHistory.Count;
 
         public Customer() { }
 
