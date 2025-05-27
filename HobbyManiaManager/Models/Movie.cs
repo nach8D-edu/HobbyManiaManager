@@ -14,8 +14,6 @@ namespace HobbyManiaManager.Models
 
         public string Title { get; set; }
 
-        public string Director { get; set; }
-
         [JsonProperty("original_title")]
         public string OriginalTitle { get; set; }
 
@@ -56,7 +54,6 @@ namespace HobbyManiaManager.Models
             {
                 Id = this.Id,
                 Title = this.Title,
-                Director = this.Director,
                 OriginalTitle = this.OriginalTitle,
                 ReleaseDate = this.ReleaseDate,
                 Status = this.Status,
