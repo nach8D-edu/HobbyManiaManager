@@ -1,6 +1,6 @@
 # Hobby Mania Manager
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/5185d46a-3f48-428c-be32-c993bc989135" width="50%">
+  <img src="https://github.com/user-attachments/assets/3c934d18-d8ce-4e3e-9538-a5221a1d80c2" width="80%">
 </p>
 
 This is a simple desktop application developed as part of the **"User Interface Design"** course.  
